@@ -40,8 +40,12 @@ class MyApp extends StatelessWidget {
         MealDetailScreen.routeName: (ctx) => MealDetailScreen()
       },
       // Used when an un-mentioned route is navigated or for dynamic routes
-      onGenerateRoute: (settings) {
-        print(settings.arguments);
+      // onGenerateRoute: (settings) {
+      //   print(settings.arguments);
+      //   return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      // },
+      // Reached when flutter is unable to render any route or to show some error to prevent app crash (404)
+      onUnknownRoute: (settings){
         return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
       },
     );
