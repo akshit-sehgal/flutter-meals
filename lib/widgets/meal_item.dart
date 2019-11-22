@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../screens/meal_details_screen.dart';
 import '../models/meal.dart';
 
 class MealItem extends StatelessWidget {
+  
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -9,6 +12,7 @@ class MealItem extends StatelessWidget {
   final Affordability affordability;
 
   MealItem({
+    @required this.id,
     @required this.title,
     @required this.imageUrl,
     @required this.complexity,
@@ -16,7 +20,10 @@ class MealItem extends StatelessWidget {
     @required this.duration,
   });
 
-  void _selectMeal() {}
+  void _selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(MealDetailScreen.routeName,arguments: id,);
+  }
+
   String get complexityText {
     switch (complexity) {
       case Complexity.Challenging:
@@ -46,7 +53,7 @@ class MealItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _selectMeal,
+      onTap: () => _selectMeal(context),
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(15),
       child: Card(
@@ -66,7 +73,7 @@ class MealItem extends StatelessWidget {
                   ),
                   child: Image.network(
                     imageUrl,
-                    height: 250,
+                    height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
@@ -96,7 +103,7 @@ class MealItem extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(15),
               child: Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
