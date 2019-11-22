@@ -302,6 +302,7 @@ const DUMMY_MEALS = const [
     id: 'm8',
     categories: [
       'c8',
+      'c11'
     ],
     title: 'Creamy Indian Chicken Curry',
     affordability: Affordability.Pricey,
@@ -335,6 +336,7 @@ const DUMMY_MEALS = const [
     id: 'm9',
     categories: [
       'c9',
+      'c11'
     ],
     title: 'Chocolate Souffle',
     affordability: Affordability.Affordable,
