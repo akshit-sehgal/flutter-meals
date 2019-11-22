@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
+  final String categoryId;
+  final String categoryTitle;
+  CategoryMealsScreen(this.categoryId, this.categoryTitle);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,7 +12,7 @@ class CategoryMealsScreen extends StatelessWidget {
         title: Text('The Recipies'),
       ),
       body: Center(
-        child: Text('The recipies for the category'),
+        child: Text(categoryTitle),
       ),
     );
   }
