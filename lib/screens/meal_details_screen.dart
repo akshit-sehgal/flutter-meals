@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../dummy-data.dart';
 
 class MealDetailScreen extends StatelessWidget {
+  final Function toggleFavourite, isFavourite;
+  MealDetailScreen(this.toggleFavourite, this.isFavourite);
   static const routeName = '/meal-detail';
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
@@ -38,6 +40,14 @@ class MealDetailScreen extends StatelessWidget {
           '${selectedMeal.title}',
           overflow: TextOverflow.ellipsis,
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              Navigator.of(context).pop(mealId);
+            },
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -104,11 +114,12 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        foregroundColor: Colors.white,
+        child:
+            Icon(isFavourite(mealId) ? Icons.favorite : Icons.favorite_border),
         onPressed: () {
-          Navigator.of(context).pop(mealId);
+          toggleFavourite(mealId);
         },
+        foregroundColor: Colors.white,
       ),
     );
   }
