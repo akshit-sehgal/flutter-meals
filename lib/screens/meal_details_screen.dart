@@ -1,14 +1,6 @@
 import 'package:flutter/material.dart';
 import '../dummy-data.dart';
 
-class MyBehavior extends ScrollBehavior {
-  @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
-    return child;
-  }
-}
-
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
   Widget buildSectionTitle(BuildContext context, String text) {
@@ -59,24 +51,35 @@ class MealDetailScreen extends StatelessWidget {
               ),
             ),
             buildSectionTitle(context, 'Ingredients'),
-            buildContainer(ListView.builder(
-              itemBuilder: (ctx, index) {
-                return Card(
-                  color: Theme.of(context).accentColor,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 5,
-                      horizontal: 10,
-                    ),
-                    child: Text(selectedMeal.ingredients[index]),
-                  ),
-                );
+            buildContainer(
+                NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (OverscrollIndicatorNotification overscroll) {
+                overscroll.disallowGlow();
+                return true;
               },
-              itemCount: selectedMeal.ingredients.length,
+              child: ListView.builder(
+                itemBuilder: (ctx, index) {
+                  return Card(
+                    color: Theme.of(context).accentColor,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                        horizontal: 10,
+                      ),
+                      child: Text(selectedMeal.ingredients[index]),
+                    ),
+                  );
+                },
+                itemCount: selectedMeal.ingredients.length,
+              ),
             )),
             buildSectionTitle(context, 'Steps'),
-            buildContainer(ScrollConfiguration(
-              behavior: MyBehavior(),
+            buildContainer(
+                NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (OverscrollIndicatorNotification overscroll) {
+                overscroll.disallowGlow();
+                return true;
+              },
               child: ListView.builder(
                 itemBuilder: (ctx, index) {
                   return Column(
